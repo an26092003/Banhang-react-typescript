@@ -77,7 +77,7 @@ const ListYourFavourite: FunctionComponent<ListProductItemsProps> = ({ heading }
                 ) : (
                     <div className="grid gap-4 mb-11 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5">
                         {currentPageItems.map((item: any) => (
-                            <div className="shadow-sm">
+                            <div key={item._id} className="shadow-sm">
                                 <div className="relative group ">
 
                                     <div className="favourite hidden group-hover:block ">
@@ -174,7 +174,3 @@ const ListYourFavourite: FunctionComponent<ListProductItemsProps> = ({ heading }
 };
 
 export default ListYourFavourite;
-
-
-
-

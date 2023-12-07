@@ -7,11 +7,13 @@ import { reduceTotal } from '@/utils/reduce';
 import { Button, Form, FormInstance, Input, InputNumber, message } from 'antd';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ButtonComponent from '../ui/ButtonComponent';
 
 interface Props {
     cartItems: any[];
     payMethod: number;
     form: FormInstance<any>;
+    discountedTotal: number;
 }
 
 const CheckoutNormal = ({ cartItems, payMethod, form }: Props) => {
@@ -29,7 +31,7 @@ const CheckoutNormal = ({ cartItems, payMethod, form }: Props) => {
             const { username, ...customer } = values;
             orders({
                 ...customer,
-                total: reduceTotal(cartItems),
+                total: discountedTotal,
                 status: Status.INFORMATION,
                 payMethod,
                 products: cartItems,
@@ -64,7 +66,7 @@ const CheckoutNormal = ({ cartItems, payMethod, form }: Props) => {
 
     return (
         <div>
-            <Form onFinish={handleSubmitCheckout} layout="vertical" form={form}>
+            <Form layout={'vertical'} onFinish={handleSubmitCheckout} form={form}>
                 <Form.Item label={'Tên đăng nhập'} name={'username'}>
                     <Input disabled />
                 </Form.Item>
@@ -97,9 +99,13 @@ const CheckoutNormal = ({ cartItems, payMethod, form }: Props) => {
                     <InputNumber className="w-full" type="number" />
                 </Form.Item>
 
-                <Button loading={orderLoading} htmlType="submit">
-                    Gửi biểu mẫu
-                </Button>
+                <ButtonComponent
+                    className="flex justify-center items-center text-base w-full py-2"
+                    loading={orderLoading}
+                    htmlType="submit"
+                >
+                    Mua hàng
+                </ButtonComponent>
             </Form>
         </div>
     );

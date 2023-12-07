@@ -1,8 +1,9 @@
-import { Button, Form, FormInstance, Input, InputNumber } from 'antd';
+import { Input, Form, FormInstance, InputNumber } from 'antd';
 import { Status } from '@/types/status';
 import axios from 'axios';
 import { reduceTotal } from '@/utils/reduce';
 import { useState } from 'react';
+import ButtonComponent from '../ui/ButtonComponent';
 
 interface Props {
     cartItems: any[];
@@ -89,16 +90,20 @@ export default function CheckoutForm({ authData, cartItems, payMethod, form }: P
                 label={'Số điện thoại'}
                 name={'phone'}
             >
-                <InputNumber className="w-full" type="number" />
+                <InputNumber className='w-full' type="number" />
             </Form.Item>
 
-            <Button htmlType="submit" onClick={() => setMethodPay(0)}>
+            {/* <Button htmlType="submit" onClick={() => setMethodPay(0)}>
                 Thanh toán bằng Stripe
-            </Button>
+            </Button> */}
 
-            <Button htmlType="submit" style={{marginLeft:10}} onClick={() => setMethodPay(1)}>
-                Thanh toán bằng VNPay
-            </Button>
+            <ButtonComponent
+                className="flex justify-center items-center text-base w-full py-2"
+                htmlType="submit"
+                onClick={() => setMethodPay(1)}
+            >
+                Thanh toán bằng VNPAY
+            </ButtonComponent>
         </Form>
     );
 }
