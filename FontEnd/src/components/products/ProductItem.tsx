@@ -115,20 +115,20 @@ const ProductItem: FunctionComponent<ProductItemProps> = ({ product }) => {
                 <div className="px-2 m-0 ">
                     <div className="relative group bg-white rounded shadow-md">
                         <div className="favourite hidden group-hover:block flex-col ">
+                            <div
+                                onClick={handleSelect}
+                                className="absolute left-5 top-5 z-10 text-xl font-semibold flex items-center justify-center p-2 text-center text-primary/90 border rounded-full shadow-xl cursor-pointer bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-100 dark:hover:bg-gray-900 hover:text-gray-50 hover:bg-primary/95 w-11 h-11 "
+                            >
+                                <AiOutlineShoppingCart />
+                            </div>
                             {!isInWishlist && (
                                 <div
                                     onClick={() => handleAddToWishlist(product?._id!, authData?._id)}
-                                    className="absolute left-5 top-5 z-10 text-xl font-semibold flex items-center justify-center p-2 text-center text-primary/90 border rounded-full shadow-xl cursor-pointer bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-100 dark:hover:bg-gray-900 hover:text-gray-50 hover:bg-primary/95 w-11 h-11 "
+                                    className="absolute left-5 top-10 z-10 text-xl font-semibold flex items-center justify-center p-2 mt-8 text-center text-primary/90 border rounded-full shadow-xl cursor-pointer bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-100 dark:hover:bg-gray-900 hover:text-gray-50 hover:bg-primary/95 w-11 h-11"
                                 >
                                     <AiOutlineHeart />
                                 </div>
                             )}
-                            <div
-                                onClick={handleSelect}
-                                className="absolute left-5 top-10 z-10 text-xl font-semibold flex items-center justify-center p-2 mt-8 text-center text-primary/90 border rounded-full shadow-xl cursor-pointer bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-100 dark:hover:bg-gray-900 hover:text-gray-50 hover:bg-primary/95 w-11 h-11"
-                            >
-                                <AiOutlineShoppingCart />
-                            </div>
                         </div>
                         <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                             <Link to={`/detail/${product?._id}`} className="">

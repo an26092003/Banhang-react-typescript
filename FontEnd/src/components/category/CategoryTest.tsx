@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useGetCategoriesQuery } from "@/services/category";
+import "./CategoryTest.css"
 
 const CategoryTest = () => {
     const { data: categories, isLoading } = useGetCategoriesQuery();
@@ -33,15 +34,15 @@ const CategoryTest = () => {
 
     return (
         <div className="container_danhmuc-product max-w-7xl mx-auto">
-            <div className="danhmuc_container px-1.5" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(170px, 1fr))', gap: '23px', cursor: 'grab' }}>
+            <div className="danhmuc_container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(170px, 1fr))', gap: '23px', cursor: 'grab' }}>
                 {isLoading ? (
                     <div>Loading...</div>
                 ) : (
                     categories?.docs.slice(0, displayedItems).map((category) => (
                         <div key={category._id} className="dm_swiper-slider">
-                            <a href="" title={`test demo code html ${category.name}`}></a>
+                            <a href="" title={`${category.name}`}></a>
                             <div className="danhmuc_img">
-                                <img src={category.img} alt="" className="rounded-full" />
+                                <img src={category.img} alt="" className="" />
                                 <span className='image_shadow'></span>
                             </div>
 
@@ -56,9 +57,9 @@ const CategoryTest = () => {
             {!isLoading && window.innerWidth < 768 && categories?.docs.length > 4 && (
                 <div className="text-center py-4">
                     {isExpanded ? (
-                        <button onClick={handleShowLess}>Thu gọn</button>
+                        <button onClick={handleShowLess} className='px-4 py-1 border bg-white/90 border-primary/90 hover:bg-primary/90 text-primary/90 hover:text-white rounded'>Thu gọn</button>
                     ) : (
-                        <button onClick={handleShowMore}>Xem thêm</button>
+                        <button onClick={handleShowMore} className='px-4 py-1 border bg-white/90 border-primary/90 hover:bg-primary/90 text-primary/90 hover:text-white rounded'>Xem thêm</button>
                     )}
                 </div>
             )}

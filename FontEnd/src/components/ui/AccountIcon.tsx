@@ -20,7 +20,7 @@ const content = (
 );
 
 const AccountIcon: React.FC = () => {
-    const { data: authData,isLoading } = useMeQuery();
+    const { data: authData, isLoading } = useMeQuery();
     const [logout, { data }] = useLogoutMutation();
 
     const handleLogout = async () => {
@@ -55,16 +55,22 @@ const AccountIcon: React.FC = () => {
                 icon: <AiOutlineDropbox style={{ fontSize: '18px' }} />,
             }
             : null,
-        // Các phần tử menu khác
-        // {
-        //     label: (
-        //         <Link className="text-base" to={`/orders/${authData?._id}`}>
-        //             Hàng đã đặt
-        //         </Link>
-        //     ),
-        //     key: '2',
-        //     icon: <AiOutlineDropbox style={{ fontSize: '18px' }} />,
-        // },
+
+        {
+            type: 'divider',
+        },
+        authData && authData.role === 'admin'
+            ? {
+                label: (
+                    <Link className="text-base" to={`/admin`}>
+                        Admin
+                    </Link>
+                ),
+                key: '1',
+                icon: <AiOutlineDropbox style={{ fontSize: '18px' }} />,
+            }
+            : null,
+
         {
             type: 'divider',
         },
@@ -99,6 +105,7 @@ const AccountIcon: React.FC = () => {
                     <Popover placement="bottom" title={text} arrow content={content} trigger="click">
                         <span className="relative inline-block text-2xl cursor-pointer max-w-[38px] max-h-[38px]">
                             <IoPersonCircleOutline className=" min-w-[38px] min-h-[38px]" />
+
                         </span>
                     </Popover>
                 )}
