@@ -1,0 +1,121 @@
+.container_danhmuc-product {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin: 0 auto;
+}
+.danhmuc_container {
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+    text-align: center;
+    width: 100%;
+}
+.danhmuc_swiper-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    transition-property: transform;
+    box-sizing: content-box;
+    padding-bottom: 1px;
+}
+.dm_swiper-slider {
+    padding: 20px 0;
+    position: relative;
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+}
+.dm_swiper-slider:hover .danhmuc_img img  {
+    top: -30px;
+    transition: 500ms all
+}
+.dm_swiper-slider:hover .danhmuc_img .image_shadow {
+    opacity: 1;
+    transition: 500ms all
+}
+.dm_swiper-slider a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 4;
+}
+a {
+    transition: all .4s ease;
+    color: #231f20;
+    text-decoration: none;
+    background-color: transparent;
+}
+.danhmuc_img {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 100%;
+}
+.danhmuc_img img {
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 3;
+    transition: 400ms all;
+    vertical-align: middle;
+    border-style: none;
+    max-width: 100%;
+    width: 160px;
+    height: 160px;
+}
+
+.image_shadow {
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 2;
+    overflow: hidden;
+    opacity: 0;
+    transition: 400ms all;
+}
+.image_shadow::before{
+    content: " ";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1;
+    width: 100%;
+    height: 30px;
+    background-image: linear-gradient(transparent, 80%, #e8d1b6)
+}
+
+.danhmuc_st h3{
+    font-size: 16px;
+    font-weight: bold;
+    margin: 15px 0 0;
+    color: #000;
+    transition: 500ms all;
+}
+.danhmuc_st:hover>h3 {
+    color: rgb(125, 99, 18);
+}
+.danhmuc_st span {
+    font-weight: 500;
+    color: #808080
+}
