@@ -1,0 +1,134 @@
+.smooth-scroll-wrapper {
+    position: relative;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+  }
+  
+  .home_section {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .home_section .video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+  }
+  
+  
+  .home_video_layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 500px;
+    z-index: -1;
+    background-color: #00000085;
+  }
+  .home_hero_heading {
+    margin-top: 30px;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:2vh;
+  }
+  
+  .home_hero_heading h3 {
+    color:  white;
+    font-size: 2vw;
+    font-weight: 500;
+    width: 50%;
+    flex: 1;
+  }
+  .home_hero_heading button {
+    flex: 1;
+    margin-top: 50px;
+    padding: 10px 30px;
+    background-color: rgba(227, 219, 115, 0.705);
+    color: white;
+    border: 1px solid white;
+    outline: none;
+    text-transform: uppercase;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.15vw;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .home_hero_heading button:hover {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+  }
+  
+  @media (max-width: 768px) {
+    .home_section .video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+    .home_video_layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 350px;
+      z-index: -1;
+      background-color: #00000085;
+    }
+  
+    .home_hero_heading {
+      margin-top: 5px;
+      z-index: 2;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap:2vh;
+    }
+    
+    .home_hero_heading h3 {
+      color:  white;
+      font-size: 3vw;
+      font-weight: 500;
+      width: 50%;
+      flex: 1;
+    }
+    .home_hero_heading button {
+      flex: 1;
+      margin-top: 30px;
+      padding: 7px 40px;
+      background-color: rgba(227, 219, 115, 0.705);
+      color: white;
+      border: 1px solid white;
+      outline: none;
+      text-transform: uppercase;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-size: 2vw;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+  }
+  

@@ -1,0 +1,58 @@
+.background__product {
+    background-image: url(https://bizweb.dktcdn.net/100/485/241/themes/911577/assets/background_module.png?1688630334113);
+    background-color: #f3eee4;
+    padding: 20px 0;
+}
+.section_danhmuc {
+    height: auto;
+    position: relative;
+    margin:  auto;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    z-index: 1;
+}
+.section_danhmuc::before {
+    content: "";
+    width: 120px;
+    height: 320px;
+    position: absolute;
+    top: 15px;
+    left: 0;
+    background-image: url(//bizweb.dktcdn.net/100/485/241/themes/911577/assets/bg_danhmuc_left.png?1688630334113);
+    background-size: cover;
+    z-index: -1;
+}
+.section_danhmuc::after {
+    content: "";
+    width: 150px;
+    height: 380px;
+    position: absolute;
+    bottom: 30px;
+    right: 0;
+    background-image: url(//bizweb.dktcdn.net/100/485/241/themes/911577/assets/bg_danhmuc_right.png?1688630334113);
+    background-size: cover;
+    z-index: -1;
+}
+
+
+@media (min-width: 1200px){
+    .container {
+    max-width: 1140px;
+}
+}
+@media (min-width: 992px){
+   .container {
+    max-width: 960px;
+} 
+}
+@media (min-width: 768px) {
+    .container {
+    max-width: 720px;
+}
+}
+
+@media (min-width: 576px){
+   .container {
+    max-width: 540px;
+} 
+}
