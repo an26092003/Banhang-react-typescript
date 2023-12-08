@@ -36,7 +36,7 @@ app.use(
 app.use(
   session({
     name: 'accessToken',
-    store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1:27017/DATN' }),
+    store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1:27017/BANHANG' }),
     cookie: {
       maxAge: 1000 * 60 * 60, // 1h
       httpOnly: true,
@@ -74,7 +74,7 @@ app.use('/api/vnpay', vnpay)
 
 const PORT = 8080;
 
-mongoose.connect("mongodb://127.0.0.1:27017/DATN");
+mongoose.connect("mongodb://127.0.0.1:27017/BANHANG");
 
 
 
