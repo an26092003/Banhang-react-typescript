@@ -36,21 +36,10 @@ const AccountDetail: React.FC = () => {
                     <aside className=''>
                             <Breadcrumbs />
                     </aside>
-                    <div className="">
-                        {/* <Modal
-                            title="Cập nhật tài khoản "
-                            centered
-                            open={openAddModal}
-                            onCancel={handleModalClose}
-                            footer={null}
-                        >
-                            <UpdateAccount setOpenAddModal={setOpenAddModal} />
-                        </Modal> */}
+                    <div className="flex-1 mx-5">
                         <div className="">
                             <div className="">
-                                <div className="">
-                                    <Outlet />
-                                </div>
+                                <Outlet />
                             </div>
                         </div>
                     </div>

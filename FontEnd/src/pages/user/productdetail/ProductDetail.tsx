@@ -7,13 +7,15 @@ import { TabsPosition } from 'antd/es/tabs';
 import RelatedProducts from '@/components/ui/RelatedProduct';
 import Breadcrumbs1 from '@/components/breadcrumbs/index1';
 import Comment from '../comment/Comment';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useGetProductByIdQuery } from '@/services/product';
 import { useAppDispatch } from '@/store/hook';
 import { addToCart } from '@/slices/cart';
 import { useMeQuery } from '@/services/auth';
 import Loading from '@/components/ui/Loading';
 import { da } from 'date-fns/locale';
+// import List_discount from '@/components/ui/List_discount';
+import './ProductDetail.css'
 
 const desc = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
 
@@ -95,7 +97,7 @@ const ProductDetail = () => {
                                                         </span>
                                                     )}
                                                 </h2>
-                                                <div className="flex flex-wrap items-center mb-6">
+                                                <div className="flex flex-row items-center mb-6 justify-between">
                                                     <span>
                                                         <Rate tooltips={desc} onChange={setValue} value={value} />
                                                         {value ? (
@@ -104,7 +106,24 @@ const ProductDetail = () => {
                                                             ''
                                                         )}
                                                     </span>
-                                                    <div><button className=' bg-layer text-center h-7 w-36'>Mã giảm giá </button>
+                                                    <div className=''>
+                                                        <Link to='/code_ma'>
+                                                            <button className="btn__background--one" type="button">
+
+                                                                <dda>Mã giảm giá</dda>
+                                                                <div id="container-stars_one">
+                                                                    <div id="stars"></div>
+                                                                </div>
+
+                                                                <div id="glow">
+                                                                    <div className="circle"></div>
+                                                                    <div className="circle"></div>
+                                                                </div>
+
+                                                            </button>
+                                                        </Link>
+                                                        
+                                                        {/* <List_discount/> */}
                                                     </div>
                                                 </div>
                                                 <p className="inline-block text-2xl font-semibold text-gray-700 dark:text-gray-400 ">

@@ -11,7 +11,7 @@ import Home from '@/pages/user/home/Home';
 import ProductDetail from '@/pages/user/productdetail/ProductDetail';
 import Signin from '@/pages/user/signin';
 import Signup from '@/pages/user/signup';
-import { Navigate, createBrowserRouter } from 'react-router-dom';
+import { Navigate, Outlet, createBrowserRouter, useLocation, useNavigate } from 'react-router-dom';
 import ListUser from '@/pages/admin/user/listUser';
 import AppTest from '@/pages/admin/category/test';
 import ListOrder from '@/pages/admin/order/listorder';
@@ -36,78 +36,108 @@ import ListColor from '@/pages/admin/color/listColor';
 import ListSize from '@/pages/admin/size/listSize';
 import ListCategory from '@/pages/admin/category/listCategory';
 import Listbrand from '@/pages/admin/trademark/listtrademark';
+import { useMeQuery } from '@/services/auth';
+import { useEffect } from 'react';
+import { toast } from 'react-toastify';
+import List_discount from '@/components/ui/List_discount';
+
+const PrivateRoute = ({ isAuth }: any) => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { data } = useMeQuery();
+    console.log(data?.role);
 
 
+    useEffect(() => {
+        if (!isAuth) {
+            navigate("/account/signin");
+        } else if (data?.role === "admin" && location.pathname === "/home") {
+            toast.warning('Bạn không thể truy cập trang web với tài khoản này !!!', { position: 'top-right' });
+            navigate("/admin");
+        }
+    }, [isAuth, data, location]);
+    return <Outlet />;
+};
 const router = createBrowserRouter([
     // Main layout
     {
-        path: '/404',
+        path: '*',
         element: <Error />,
     },
     {
         path: '/',
-        element: <MainLayout />,
+        element: <PrivateRoute isAuth={true} />,
         children: [
             {
-                path: '',
-                element: <Home />,
-            },
-            {
-                path: 'cart',
-                element: <Cart />,
-            },
-            {
-                path: 'filter',
-                element: <FilterProducts />,
-            },
-            {
-                path: 'detail/:id',
-                element: <ProductDetail />,
-            },
-            {
-                path: 'checkout',
-                element: <LocationList />,
-            },
-            {
-                path: 'your-favorite',
-                element: <YourFavourite />,
-            }, {
-                path: 'orders/:userId',
-                element: <OrderSumeries/>
-            },
-            {
-                path: '/details',
-                element: <AccountDetail />,
-                children :[
+                element: <MainLayout />,
+                children: [
+                    { index: true, element: <Navigate to="home" /> },
                     {
-                        index: true,
-                        element: <Navigate to="view_account" />,
+                        path: 'home',
+                        element: <Home />,
                     },
                     {
-                        path : 'view_account', element: <View_account/>
+                        path: 'cart',
+                        element: <Cart />,
                     },
                     {
-                        path : 'orders/:userId', element: <OrderSumeries/>
+                        path: 'filter',
+                        element: <FilterProducts />,
                     },
                     {
-                        path : 'favourite', element: <YourFavourite/>
+                        path: 'detail/:id',
+                        element: <ProductDetail />,
                     },
                     {
-                        path : 'sale', element: <Discount_code/>
-                    }
-                ]
+                        path: 'checkout',
+                        element: <LocationList />,
+                    },
+                    {
+                        path: 'your-favorite',
+                        element: <YourFavourite />,
+                    }, {
+                        path: 'orders/:userId',
+                        element: <OrderSumeries />
+                    }, {
+                        path: 'code_ma',
+                        element: <List_discount />
+                    },
+                    {
+                        path: '/details',
+                        element: <AccountDetail />,
+                        children: [
+                            {
+                                index: true,
+                                element: <Navigate to="view_account" />,
+                            },
+                            {
+                                path: 'view_account', element: <View_account />
+                            },
+                            {
+                                path: 'orders/:userId', element: <OrderSumeries />
+                            },
+                            {
+                                path: 'favourite', element: <YourFavourite />
+                            },
+                            {
+                                path: 'sale', element: <Discount_code />
+                            }
+                        ]
+                    },
+                    {
+                        path: '/orders/:id/return',
+                        element: <Hoandon />,
+
+                    },
+                    {
+                        path: '/hoan/:id/',
+                        element: <Hoan />,
+
+                    },
+                ],
             },
-            {
-                path: '/orders/:id/return',
-                element: <Hoandon />,
-                
-            }, 
-            {
-                path: '/hoan/:id/',
-                element: <Hoan />,
-                
-            }, 
         ],
+
     },
     {
         path: '/account',
@@ -120,16 +150,16 @@ const router = createBrowserRouter([
                 path: 'signin',
                 element: <Signin />,
             },
-            
+
             {
                 path: 'forgot-password',
-                element: <ForgotPassword/>
+                element: <ForgotPassword />
             },
             {
                 path: 'change-password',
-                element: <ChangePassword/>
+                element: <ChangePassword />
             },
-            
+
         ],
     },
 
@@ -139,48 +169,57 @@ const router = createBrowserRouter([
     },
     {
         path: 'cancelled/:id',
-        element: <CancelCheckout/>
+        element: <CancelCheckout />
     },
     // Admin
     {
-        path: '/admin',
-        element: <AdminLayout />,
+        path: "/admin",
+        element: <PrivateRoute isAuth={true} />,
         children: [
             {
-                index: true,
-                element: <Navigate to="dashboard" />,
+                element: <AdminLayout />,
+                children: [
+                    { index: true, element: <Navigate to="dashboard" /> },
+                    { path: 'dashboard', element: <DashBoard /> },
+                    { path: 'product', element: <ListProduct /> },
+                    { path: 'category', element: <ListCategory /> },
+                    { path: 'user', element: <ListUser /> },
+                    { path: 'user/update/:id', element: <UpdateUser /> },
+                    { path: 'test', element: <AppTest /> },
+                    { path: 'order', element: <ListOrder /> },
+                    { path: 'sale', element: <ListSale /> },
+                    { path: 'product/:id/comments', element: <ListComment /> },
+                    { path: 'color', element: <ListColor /> },
+                    { path: 'size', element: <ListSize /> },
+                    { path: 'brand', element: <Listbrand /> }
+                ],
             },
-            { path: 'dashboard', element: <DashBoard /> },
-            { path: 'product', element: <ListProduct /> },
-            { path: 'category', element: <ListCategory /> },
-            { path: 'user', element: <ListUser /> },
-            { path: 'user/update/:id', element: <UpdateUser /> },
-            { path: 'test', element: <AppTest /> },
-            { path: 'order', element: <ListOrder /> },
-            { path: 'sale', element: <ListSale /> },
-            { path: 'product/:id/comments', element: <ListComment /> },
-            { path: 'color', element: <ListColor /> },
-            { path: 'size', element: <ListSize /> },
-            {path:'brand', element: <Listbrand/>}
         ],
     },
+
     // Editer
     {
-        path: '/editor',
-        element: <EditorLayout/>,
+        path: "/editor",
+        element: <PrivateRoute isAuth={true} />,
         children: [
             {
-                index: true,
-                element: <Navigate to="category" />,
+                element: <EditorLayout />,
+                children: [
+                    {
+                        index: true,
+                        element: <Navigate to="category" />,
+                    },
+                    { path: 'product', element: <ListProduct /> },
+                    { path: 'category', element: <ListCategory /> },
+                    { path: 'test', element: <AppTest /> },
+                    { path: 'product/:id/comments', element: <ListComment /> },
+                    { path: 'color', element: <ListColor /> },
+                    { path: 'size', element: <ListSize /> },
+                    { path: 'brand', element: <Listbrand /> }
+                ],
             },
-            { path: 'product', element: <ListProduct /> },
-            { path: 'category', element: <ListCategory /> },
-            { path: 'test', element: <AppTest /> },
-            { path: 'product/:id/comments', element: <ListComment /> },
-            { path: 'color', element: <ListColor /> },
-            { path: 'size', element: <ListSize /> },
-            {path:'brand', element: <Listbrand/>}
         ],
     },
+
 ]);
 export default router;
